@@ -98,7 +98,7 @@ def fit(grid, card, x, y):
 
 
 def rotations(card):
-    for delta in range(4):
+    for delta in range(len(card)):
         yield card[delta:] + card[0:delta]
 
 
