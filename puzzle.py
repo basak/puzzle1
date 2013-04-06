@@ -64,7 +64,7 @@ CARDS = [
  ],
 ]
 
-EMPTY_GRID = [[None, None, None], [None, None, None], [None, None, None]]
+EMPTY_GRID = [3 * [None] for x in range(3)]
 
 DELTAS = [
     (1, 0),
