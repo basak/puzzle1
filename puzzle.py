@@ -9,7 +9,7 @@ SHAPE, HOLE = True, False
 
 CARDS = [
  [
-  (SPADE, SHAPE), 
+  (SPADE, SHAPE),
   (DIAMOND, SHAPE),
   (HEART, HOLE),
   (DIAMOND, HOLE),
