@@ -4,64 +4,18 @@ import copy
 import pprint
 
 
-HEART, DIAMOND, SPADE, CLUB = range(4)
-SHAPE, HOLE = True, False
+HEART, DIAMOND, SPADE, CLUB = range(1, 5)
 
 CARDS = [
- [
-  (SPADE, SHAPE),
-  (DIAMOND, SHAPE),
-  (HEART, HOLE),
-  (DIAMOND, HOLE),
- ],
- [
-  (DIAMOND, SHAPE),
-  (CLUB, SHAPE),
-  (CLUB, HOLE),
-  (DIAMOND, HOLE),
- ],
- [
-  (SPADE, SHAPE),
-  (SPADE, SHAPE),
-  (HEART, HOLE),
-  (CLUB, HOLE),
- ],
- [
-  (SPADE, SHAPE),
-  (DIAMOND, SHAPE),
-  (SPADE, HOLE),
-  (HEART, HOLE),
- ],
- [
-  (CLUB, SHAPE),
-  (HEART, SHAPE),
-  (DIAMOND, HOLE),
-  (CLUB, HOLE),
- ],
- [
-  (HEART, SHAPE),
-  (DIAMOND, SHAPE),
-  (CLUB, HOLE),
-  (CLUB, HOLE),
- ],
- [
-  (HEART, SHAPE),
-  (DIAMOND, SHAPE),
-  (DIAMOND, HOLE),
-  (HEART, HOLE),
- ],
- [
-  (HEART, SHAPE),
-  (SPADE, SHAPE),
-  (SPADE, HOLE),
-  (CLUB, HOLE),
- ],
- [
-  (CLUB, SHAPE),
-  (HEART, SHAPE),
-  (SPADE, HOLE),
-  (HEART, HOLE),
- ],
+    [+SPADE, +DIAMOND, -HEART, -DIAMOND],
+    [+DIAMOND, +CLUB, -CLUB, -DIAMOND],
+    [+SPADE, +SPADE, -HEART, -CLUB],
+    [+SPADE, +DIAMOND, -SPADE, -HEART],
+    [+CLUB, +HEART, -DIAMOND, -CLUB],
+    [+HEART, +DIAMOND, -CLUB, -CLUB],
+    [+HEART, +DIAMOND, -DIAMOND, -HEART],
+    [+HEART, +SPADE, -SPADE, -CLUB],
+    [+CLUB, +HEART, -SPADE, -HEART],
 ]
 
 EMPTY_GRID = [3 * [None] for x in range(3)]
@@ -90,10 +44,8 @@ def fit(grid, card, x, y):
         if other_card is None:
             continue
         other_card_connector = other_card[reverse_direction(direction)]
-        if card_connector[0] != other_card_connector[0]:
-            return False  # match suit
-        if card_connector[1] == other_card_connector[1]:
-            return False  # match fit
+        if card_connector + other_card_connector:
+            return False
     return True
 
 
