@@ -5,6 +5,7 @@ import pprint
 
 
 HEART, DIAMOND, SPADE, CLUB = range(1, 5)
+SUIT_LOOKUP = ['HEART', 'DIAMOND', 'SPADE', 'CLUB']
 
 CARDS = [
     [+SPADE, +DIAMOND, -HEART, -DIAMOND],
@@ -26,6 +27,19 @@ DELTAS = [
     (0, 1),
     (-1, 0),
 ]
+
+
+def index_to_suit(index):
+    sign = '-' if index < 0 else '+'
+    return '%s%s' % (sign, SUIT_LOOKUP[abs(index) - 1])
+
+
+def card_to_str(card):
+    return [index_to_suit(x) for x in card]
+
+
+def pprint_grid(grid):
+    pprint.pprint([[card_to_str(card) for card in row] for row in grid])
 
 
 def reverse_direction(direction):
@@ -77,7 +91,7 @@ def solve_one(grid, remaining_cards):
                 new_grid = copy.deepcopy(grid)
                 new_grid[hole_y][hole_x] = rotated_card
                 if len(remaining_cards) == 1:
-                    pprint.pprint(new_grid)
+                    pprint_grid(new_grid)
                     return True
                 else:
                     if solve_one(new_grid, remaining_cards[1:]):
